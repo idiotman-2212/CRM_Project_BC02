@@ -1,0 +1,3 @@
+Muốn thêm mới quyền thì gõ đường dẫn: role-add
+Muốn thêm mới dự án thì gõ đường dẫn: groupwork-add
+Muốn xoá người dùng theo id, thì nhấn vào button xoá sẽ xoá người dùng đó
