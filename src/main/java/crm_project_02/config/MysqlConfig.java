@@ -10,7 +10,7 @@ public class MysqlConfig {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			//khai báo driver sẽ mở kết nối tới csdl nào
-			return DriverManager.getConnection("jdbc:mysql://localhost:3307/layoutcrm","root", "dienchau45" );
+			return DriverManager.getConnection("jdbc:mysql://localhost:3307/crmTest","root", "dienchau45" );
 		} catch (Exception e) {
 			// lỗi xảy ra sẽ chạy vào đây
 			System.out.println("Lỗi kết nối database " + e.getLocalizedMessage());

@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.catalina.User;
-
 import crm_project_02.config.MysqlConfig;
 import crm_project_02.entity.Role;
 import crm_project_02.entity.Users;
@@ -44,7 +42,7 @@ public class UserRepository {
 	}
 	
 	public List<Users> getAllUsers(){
-		List<Users> list = new ArrayList<Users>();
+		List<Users> listUser = new ArrayList<Users>();
 		
 		String query = "select u.id, u.firstName, u.lastName, u.userName, r.name\n"
 				+ "from Users u \n"
@@ -66,7 +64,7 @@ public class UserRepository {
 				
 				users.setRole(role);
 				
-				list.add(users);
+				listUser.add(users);
 			}
 			
 		}catch (Exception e) {
@@ -79,7 +77,7 @@ public class UserRepository {
 			}
 		}
 		
-		return list;
+		return listUser;
 	}
 	public int deleteById(int id) {
 		int count = 0;
@@ -97,9 +95,10 @@ public class UserRepository {
 		
 		return count;
 	}
+	
 	 public List<Users> findById(int id) {
 		 List<Users> list = new ArrayList<Users>();
-		 String query = "select u.id, u.firstName, u.lastName, u.userName, r.name\n"
+		 String query = "select u.id, u.email, u.firstName, u.lastName, u.fullname , u.userName, u.phone, r.name\n"
 					+ "from Users u \n"
 					+ "join Role r ON u.id_role = r.id where u.id = ?";
 		 Connection connection = MysqlConfig.getConnection();
@@ -111,9 +110,12 @@ public class UserRepository {
 			while(resultSet.next()) {
 				Users users = new Users();
 				users.setId(resultSet.getInt("id"));
+				users.setEmail(resultSet.getString("email"));
 				users.setFirstName(resultSet.getString("firstName"));
 				users.setLastName(resultSet.getString("lastName"));
+				users.setFullName(resultSet.getString("fullName"));
 				users.setUserName(resultSet.getString("userName"));
+				users.setPhone(resultSet.getString("phone"));
 				
 				Role role = new Role();
 				role.setName(resultSet.getString("name"));
@@ -125,32 +127,32 @@ public class UserRepository {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		 
-		 
-		 
+		  
 		return list;
 	 }
 	
-	public int updateById(int id, String firstName, String lastName, String userName, int idRole) {
+	public int updateById(String fullname, String email, String pwd, String phone, int idRole, int id) {
 	    int count = 0;
-	    String query = "UPDATE Users SET firstName = ?, lastName = ?, userName = ?, id_role = ? WHERE id = ?";
+	    String query = "UPDATE Users SET fullName = ?, email = ?, pwd = ?, phone = ?, id_role = ? WHERE id = ?";
 	    Connection connection = MysqlConfig.getConnection();
 	    try {
 	        PreparedStatement statement = connection.prepareStatement(query);
-	        statement.setString(1, firstName);
-	        statement.setString(2, lastName);
-	        statement.setString(3, userName);
-	        statement.setInt(4, idRole);
-	        statement.setInt(5, id);
+	        statement.setString(1, email);
+	        statement.setString(2, fullname);
+	        statement.setString(3, email);
+	        statement.setString(4, pwd);
+	        statement.setString(5, phone);
+	        statement.setInt(6, idRole);
+	        statement.setInt(7, id);
 	        
 	        count = statement.executeUpdate();
 	    } catch (SQLException e) {
-	        System.out.println("Error updating user: " + e.getLocalizedMessage());
+	        System.out.println("Lỗi cập nhật user: " + e.getLocalizedMessage());
 	    } finally {
 	        try {
 	            connection.close();
 	        } catch (SQLException e) {
-	            System.out.println("Error closing connection: " + e.getLocalizedMessage());
+	            System.out.println("Lỗi đóng kết nối: " + e.getLocalizedMessage());
 	        }
 	    }
 	    

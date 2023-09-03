@@ -150,27 +150,16 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr>
-											<td>1</td>
-											<td>Phân tích dự án</td>
-											<td>Dự án CRM</td>
-											<td>Nguyễn Văn Tèo</td>
-											<td>22/05/2019</td>
-											<td>30/05/2019</td>
-											<td>Đã hoàn thành</td>
-											<td><a href="#" class="btn btn-sm btn-primary btn-sua">Sửa</a>
-												<a href="#" class="btn btn-sm btn-danger btn-xoa">Xóa</a> <a
-												href="#" class="btn btn-sm btn-info">Xem</a></td>
-										</tr>
-										<c:forEach var="item" items="${ tasks }">
+
+										<c:forEach var="item" items="${ listTask }">
 											<tr>
 												<td>${item.id }</td>
 												<td>${item.name }</td>
-												<td>${item.job_name }</td>
-												<td>${item.user_name }</td>
-												<td class="dateId">${item.start_date }</td>
-												<td class="dateId">${item.end_date }</td>
-												<td>${item.status_name }</td>
+												<td>${item.groupwork.name }</td>
+												<td>${item.users.name }</td>
+												<td class="dateId">${item.startDate }</td>
+												<td class="dateId">${item.endDate }</td>
+												<td>${item.status.name }</td>
 												<td><a href="<c:url value="/task/edit?id=${item.id}"/>"
 													class="btn btn-sm btn-primary">Sửa</a> <a
 													href='<c:url value="/task/delete?id=${item.id}"/>'

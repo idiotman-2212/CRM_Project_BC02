@@ -3,6 +3,7 @@ package crm_project_02.entity;
 public class Status {
     private int id;
     private String name;
+    
 	public int getId() {
 		return id;
 	}

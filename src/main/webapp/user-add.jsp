@@ -170,7 +170,7 @@
 									<label class="col-sm-12">Select Role</label>
 									<div class="col-sm-12">
 										<select name="role" class="form-control form-control-line">
-											<option value="${ user.role_id }" selected hidden>${ user.roleName }</option>
+											<option value="${ user.idRole }" selected hidden>${ user.name }</option>
 											<c:forEach var="item" items="${listRole}">
 												<option value="${item.id}">${item.name}</option>
 											</c:forEach>
@@ -186,6 +186,13 @@
 									</div>
 								</div>
 							</form>
+							<c:if test="${isSuccess}">
+		                    	Thêm thành công
+		                    </c:if>
+		                    
+		                    <c:if test="${!isSuccess }">
+		                    	Thêm thất bại
+		                    </c:if>
 						</div>
 					</div>
 					<div class="col-md-2 col-12"></div>

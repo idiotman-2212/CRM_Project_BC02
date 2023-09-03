@@ -7,7 +7,10 @@ public class Users {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private String fullName;
 	private String userName;
+	private String phone;
+	private String image;
 	private Role role;
 	
 	public String getFirstName() {
@@ -51,6 +54,24 @@ public class Users {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public String getFullName() {
+		return fullName;
+	}
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getImage() {
+		return image;
+	}
+	public void setImage(String image) {
+		this.image = image;
 	}
 	
 	

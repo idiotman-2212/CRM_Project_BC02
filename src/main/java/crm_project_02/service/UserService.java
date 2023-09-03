@@ -25,6 +25,7 @@ public class UserService {
 	public List<Users> getAllUsers(){
 		return userRepository.getAllUsers();
 	}
+	
 	public boolean deleteUser(int id) {
 		int count = userRepository.deleteById(id);
 		
@@ -35,10 +36,11 @@ public class UserService {
 		return userRepository.findById(id);
 	}
 	
-	public boolean updateUser(int id, String firstName, String lastName, String userName, int idRole) {
-	    int count = userRepository.updateById(id, firstName, lastName, userName, idRole);
+	public boolean updateUser(String fullname, String email, String pwd, String phone, int idRole, int id) {
+	    int count = userRepository.updateById(fullname, email, pwd, phone, idRole, id);
 	    
 	    return count > 0;
 	}
-
+	
+		
 }

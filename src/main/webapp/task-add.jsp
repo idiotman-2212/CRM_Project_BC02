@@ -134,7 +134,7 @@
 								<div class="form-group">
 									<label class="col-md-12">Dự án</label>
 									<div class="col-md-12">
-										<select name="project_name"
+										<select name="id_project"
 											class="form-control form-control-line">
 
 											<c:forEach var="item" items="${listGroupWork }">
@@ -151,17 +151,17 @@
 								<div class="form-group">
 									<label class="col-md-12">Tên công việc</label>
 									<div class="col-md-12">
-										<input name="job_name" type="text" placeholder="Tên công việc"
+										<input name="name" type="text" placeholder="Tên công việc"
 											class="form-control form-control-line">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-12">Người thực hiện</label>
 									<div class="col-md-12">
-										<select name="performer"
+										<select name="id_user"
 											class="form-control form-control-line">
-											<c:forEach var="performer" items="${listUser }">
-												<option value="${performer.id }">${performer.fullname}</option>
+											<c:forEach var="item" items="${listUser }">
+												<option value="${item.id}">${item.fullName}</option>
 											</c:forEach>
 
 											<!-- <option>Nguyễn Văn Tèo</option>
@@ -173,14 +173,14 @@
 								<div class="form-group">
 									<label class="col-md-12">Ngày bắt đầu</label>
 									<div class="col-md-12">
-										<input name="start_date" type="text" placeholder="dd/MM/yyyy"
+										<input name="startDate" type="text" placeholder="dd/MM/yyyy"
 											class="form-control form-control-line">
 									</div>
 								</div>
 								<div class="form-group">
 									<label class="col-md-12">Ngày kết thúc</label>
 									<div class="col-md-12">
-										<input name="end_date" type="text" placeholder="dd/MM/yyyy"
+										<input name="endDate" type="text" placeholder="dd/MM/yyyy"
 											class="form-control form-control-line">
 									</div>
 								</div>

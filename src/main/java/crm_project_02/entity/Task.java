@@ -6,6 +6,7 @@ public class Task {
 	private String content;
 	private String startDate;
 	private String endDate;
+	
 	private Users users;
 	private Status status;
 	private GroupWork groupWork;

@@ -11,14 +11,15 @@ import java.util.List;
 import crm_project_02.config.MysqlConfig;
 import crm_project_02.entity.GroupWork;
 import crm_project_02.entity.Role;
+import crm_project_02.entity.Status;
 import crm_project_02.entity.Task;
 import crm_project_02.entity.Users;
 
 public class TaskRepository {
 //	strategy pattern
-	public int insert(String project_name, String job_name, String performer_name, String start_date, String end_date) {
+	public int insert(int project_name, String name, int performer, String start_date, String end_date) {
 		int count = 0;
-		String query = "INSERT INTO Job (project_name, job_name, performer_name, start_date, end_date) VALUES (?, ?, ?, ?, ?)";
+		String query = "INSERT INTO Job (id_project, name, id_user, startDate, endDate) VALUES (?, ?, ?, ?, ?)";
 		Connection connection = MysqlConfig.getConnection();
 		boolean isSuccess = false;
 		try {
@@ -32,9 +33,9 @@ public class TaskRepository {
 			PreparedStatement statement = connection.prepareStatement(query);
 			GroupWork groupWork = new GroupWork();
 			
-			statement.setString(1, project_name);
-			statement.setString(2, job_name);
-			statement.setString(3, performer_name);
+			statement.setInt(1, project_name);
+			statement.setString(2, name);
+			statement.setInt(3, performer);
 			statement.setDate(4, sqlStartDate);
 			statement.setDate(5, sqlEndDate);
 
@@ -62,51 +63,63 @@ public class TaskRepository {
 	}
 	
 	public List<Task> getAllTask(){
-		List<Task> list = new ArrayList<Task>();
-		
-		String query = "select u.id, u.firstName, u.lastName, u.userName, r.name\n"
-				+ "from Users u \n"
-				+ "join Role r ON u.id_role = r.id";
+		List<Task> listTasks = new ArrayList<>();
+		String query = "SELECT\r\n"
+				+ "    j.name,\r\n"
+				+ "    p.name AS project_name,\r\n"
+				+ "    u.fullName  AS performer,\r\n"
+				+ "    j.startDate AS start_date,\r\n"
+				+ "    j.endDate AS end_date\r\n"
+				+ "FROM Job j\r\n"
+				+ "JOIN Project p ON j.id_project = p.id\r\n"
+				+ "JOIN Users u ON j.id_user = u.id;"
+				+ "";
 		
 		Connection connection = MysqlConfig.getConnection();
+
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
 			ResultSet resultSet = statement.executeQuery();
-			while(resultSet.next()) {
+			while (resultSet.next()) {
 				Task task = new Task();
-				task.setId(resultSet.getInt("id"));
-				task.set
-				task.setFirstName(resultSet.getString("firstName"));
-				task.setLastName(resultSet.getString("lastName"));
-				task.setUserName(resultSet.getString("userName"));
+				Users users = new Users();
+				GroupWork groupWork = new GroupWork();
 				
-				Role role = new Role();
-				role.setName(resultSet.getString("name"));
-				
-				users.setRole(role);
-				
-				list.add(users);
+				task.setName(resultSet.getString("name"));
+
+				groupWork.setName(resultSet.getString("project_name"));
+				task.setGroupWork(groupWork);
+
+				users.setFullName(resultSet.getString("performer"));
+				task.setUsers(users);
+
+				task.setStartDate(resultSet.getString("start_date"));
+				task.setEndDate(resultSet.getString("end_date"));
+
+
+				listTasks.add(task);
 			}
-			
-		}catch (Exception e) {
-			System.out.println("Lỗi lấy danh sách user " + e.getLocalizedMessage());
-		}finally {
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			try {
-				connection.close();
+				if (connection != null) {
+					connection.close();
+				}
 			} catch (Exception e2) {
-				// TODO: handle exception
+				e2.printStackTrace();
 			}
 		}
 		
-		return list;
+		return listTasks;
 	}
-	public int deleteById(int id) {
+	public int deleteTaskById(String id) {
 		int count = 0;
-		String query = "DELETE FROM Users u WHERE u.id = ?";
+		String query = "DELETE FROM Job j WHERE j.id = ?";
 		Connection connection = MysqlConfig.getConnection();
 		try {
 			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setInt(1, id);
+			statement.setString(1, id);
 			
 			count = statement.executeUpdate();
 		} catch (SQLException e) {
@@ -116,17 +129,19 @@ public class TaskRepository {
 		
 		return count;
 	}
-	public int updateById(int id, String firstName, String lastName, String userName, int idRole) {
+	public int updateTaskById(String id, int id_project, String name, int id_user, String start_date, String end_date, int id_status) {
 	    int count = 0;
-	    String query = "UPDATE Users SET firstName = ?, lastName = ?, userName = ?, id_role = ? WHERE id = ?";
+	    String query = "UPDATE Job SET name = ? , startDate = ?, endDate = ?, id_user = ? , id_project  = ? , id_status  = ? WHERE id = ?";
 	    Connection connection = MysqlConfig.getConnection();
 	    try {
 	        PreparedStatement statement = connection.prepareStatement(query);
-	        statement.setString(1, firstName);
-	        statement.setString(2, lastName);
-	        statement.setString(3, userName);
-	        statement.setInt(4, idRole);
-	        statement.setInt(5, id);
+	        statement.setString(1, name);
+	        statement.setString(2, start_date);
+	        statement.setString(3, end_date);
+	        statement.setInt(4, id_user);
+	        statement.setInt(5, id_project);
+	        statement.setInt(6, id_status);
+	        statement.setString(7, id);
 	        
 	        count = statement.executeUpdate();
 	    } catch (SQLException e) {
@@ -141,5 +156,50 @@ public class TaskRepository {
 	    
 	    return count;
 	}
-
+	
+	public List<Task> findById(String id) {
+		List<Task> list = new ArrayList<Task>();
+		String query = "SELECT \r\n"
+				+ "	j.id,\r\n"
+				+ "    j.name,\r\n"
+				+ "    p.name AS project_name,\r\n"
+				+ "    u.fullName  AS performer,\r\n"
+				+ "    j.startDate AS start_date,\r\n"
+				+ "    j.endDate AS end_date\r\n"
+				+ "FROM Job j\r\n"
+				+ "JOIN Project p ON j.id_project = p.id\r\n"
+				+ "JOIN Users u ON j.id_user = u.id\r\n"
+				+ "where j.id = ?";
+		Connection connection = MysqlConfig.getConnection();
+		PreparedStatement statement;
+		try {
+			statement = connection.prepareStatement(query);
+			statement.setString(1, id);
+			ResultSet resultSet = statement.executeQuery();
+			while(resultSet.next()) {
+				Task task = new Task();
+				task.setId(resultSet.getInt("id"));
+				task.setName(resultSet.getString("name"));
+				
+				Users users = new Users();
+				users.setFullName(resultSet.getString("performer"));
+				task.setUsers(users);
+				
+				task.setStartDate(resultSet.getString("startDate"));
+				task.setEndDate(resultSet.getString("endDate"));
+				
+				GroupWork groupWork = new GroupWork();
+				groupWork.setName(resultSet.getString("project_name"));
+				task.setGroupWork(groupWork);
+				
+				list.add(task);
+				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+		
+	}
 }

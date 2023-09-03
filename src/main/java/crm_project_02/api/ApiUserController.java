@@ -81,12 +81,13 @@ public class ApiUserController extends HttpServlet {
 		        if (path.equals("/api/user/update")) {
 		            // Lấy thông tin từ request parameters
 		            int id = Integer.parseInt(req.getParameter("id"));
-		            String firstName = req.getParameter("firstName");
-		            String lastName = req.getParameter("lastName");
-		            String userName = req.getParameter("userName");
-		            int idRole = Integer.parseInt( req.getParameter("idRole"));
+		            String fullname = req.getParameter("fullname");
+		    		String pwd = req.getParameter("pwd");
+		    		String phone = req.getParameter("phone");
+		    		String email = req.getParameter("email");
+		    		int idRole = Integer.parseInt(req.getParameter("idRole"));
 		            
-		            boolean isSuccess = userService.updateUser(id, firstName, lastName, userName, idRole);
+		            boolean isSuccess = userService.updateUser(fullname, email, pwd, phone, idRole, id);
 
 		            BaseReponse response = new BaseReponse();
 		            response.setStatusCode(200);
