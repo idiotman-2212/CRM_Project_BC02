@@ -35,9 +35,9 @@ public class UserController extends HttpServlet {
 		switch (path) {
 		case "/user-table":
 			List<Users> listUser = userService.getAllUsers();
-			//int id = Integer.parseInt(req.getParameter("id"));
-			//listUsers = userService.findById(id);
-			//req.setAttribute("listRole", roleService.getAllRole());
+//			int id = Integer.parseInt(req.getParameter("id"));
+//			listUser = userService.findById(id);
+//			req.setAttribute("listRole", roleService.getAllRole());
 			req.setAttribute("listUser", listUser);
 			req.getRequestDispatcher("user-table.jsp").forward(req, resp);
 			break;
@@ -70,20 +70,18 @@ public class UserController extends HttpServlet {
 		String phone = req.getParameter("phone");
 		String email = req.getParameter("email");
 		int idRole = Integer.parseInt(req.getParameter("role"));
-
-		String action = req.getServletPath(); 
 		
 		
 		boolean isSuccess = userService.insertUser(fullname, email, password, phone, idRole);
-		// boolean isSuccess1 = userService.updateUser(fullname, email, email, phone, idRole, idRole);
+		//boolean isSuccess1 = userService.findById(id);
 
 		List<Role> list = new ArrayList<Role>();
 		list = userService.getAllRole();
 
 		req.setAttribute("listRole", list);
 		req.setAttribute("isSuccess", isSuccess);
-		// req.setAttribute("isSuccess1", isSuccess1);
-
+		//req.setAttribute("isSuccess1", isSuccess1);
+		
 		req.getRequestDispatcher("user-add.jsp").forward(req, resp);
 	}
 

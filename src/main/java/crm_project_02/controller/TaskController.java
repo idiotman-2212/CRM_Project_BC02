@@ -41,18 +41,12 @@ public class TaskController extends HttpServlet {
 		String path = req.getServletPath();
 
 		if (path.equals("/task-add")) {
-			
+	
 			List<Users> listUser = new ArrayList<Users>();
-			try {
-				listUser = getAllUser();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				System.out.println("Lỗi get all users " + e.getLocalizedMessage());
-			}
-			
 			List<GroupWork> listGroupWork = new ArrayList<GroupWork>();
 			try {
-				listGroupWork = getAllGroupWork();
+				listUser = taskService.getAllUsers();
+				listGroupWork = taskService.getAllGroupWorks();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				System.out.println("Lỗi get all groupwork " + e.getLocalizedMessage());
@@ -63,40 +57,7 @@ public class TaskController extends HttpServlet {
 			req.getRequestDispatcher("task-add.jsp").forward(req, resp);
 			
 		} else if (path.equals("/task")) {
-			List<Task> listTask = new ArrayList<Task>();
-			String query = "SELECT * FROM Job";
-			Connection connection = MysqlConfig.getConnection();
-			try {
-				PreparedStatement statement = connection.prepareStatement(query);
-				ResultSet resultSet = statement.executeQuery();
-				while(resultSet.next()) {
-					Task task = new Task();
-					task.setId(resultSet.getInt("id"));
-					task.setName(resultSet.getString("name"));
-					
-					GroupWork groupWork = new GroupWork();
-					groupWork.setName(resultSet.getString("name"));
-					task.setGroupWork(groupWork);
-					
-					Users users = new Users();
-					users.setFullName(resultSet.getString("fullName"));
-					task.setUsers(users);
-					
-					task.setStartDate(resultSet.getString("startDate"));
-					task.setEndDate(resultSet.getString("endDate"));
-					
-					Status status = new Status();
-					status.setName(resultSet.getString("name"));
-					task.setStatus(status);
-					
-					listTask.add(task);
-				}
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			
+			List<Task> listTask = taskService.getAllTasks(); 
 			req.setAttribute("listTask", listTask);
 			req.getRequestDispatcher("task.jsp").forward(req, resp);
 		}
@@ -111,86 +72,23 @@ public class TaskController extends HttpServlet {
 		String startDate = req.getParameter("startDate");
 		String endDate = req.getParameter("endDate");
 		
-
-		String query = "INSERT INTO Job (id_project, name, id_user, startDate, endDate) VALUES (?, ?, ?, ?, ?)";
-		Connection connection = MysqlConfig.getConnection();
-		boolean isSuccess = false;
-		try {
-			PreparedStatement statement = connection.prepareStatement(query);
-			statement.setInt(1, id_project);
-			statement.setString(2, name);
-			statement.setInt(3, id_user);
-			statement.setString(4, startDate);
-			statement.setString(5, endDate);
-			
-			int count = statement.executeUpdate();
-			if(count > 0) {
-				isSuccess = true;
-				System.out.println("Thêm thành công");
-			}
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			System.out.println("Lỗi thêm dữ liệu Task" + e.getLocalizedMessage());
-		}finally {
+		boolean isSuccess = taskService.insertTask(id_project, name, id_user, startDate, endDate);
+		
+		List<Users> listUser = new ArrayList<Users>();
+		List<GroupWork> listGroupWork = new ArrayList<GroupWork>();
 			try {
-				connection.close();
+				listUser = taskService.getAllUsers();
+				listGroupWork = taskService.getAllGroupWorks();
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
-				System.out.println("Lỗi đóng kết nối " + e.getLocalizedMessage());
+				e.printStackTrace();
 			}
-		}
-		List<Users> listUser = new ArrayList<Users>();
-		try {
-			listUser = getAllUser();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Lỗi get all users " + e.getLocalizedMessage());
-		}
 		
-		List<GroupWork> listGroupWork = new ArrayList<GroupWork>();
-		try {
-			listGroupWork = getAllGroupWork();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			System.out.println("Lỗi get all groupwork " + e.getLocalizedMessage());
-		}
 
 		req.setAttribute("listUser", listUser);
 		req.setAttribute("listGroupWork", listGroupWork);
 		req.setAttribute("isSuccess", isSuccess);
 		req.getRequestDispatcher("task-add.jsp").forward(req, resp);
 
-	}
-
-	private List<Users> getAllUser() throws SQLException{
-		String query = "SELECT u.id, u.fullName FROM Users u";
-		Connection connection = MysqlConfig.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
-		ResultSet resultSet = statement.executeQuery();
-		List<Users> listUsers = new ArrayList<Users>();
-		
-		while(resultSet.next()) {
-			Users users = new Users();
-			users.setId(resultSet.getInt("id"));
-			users.setFullName(resultSet.getString("fullName"));
-			listUsers.add(users);
-		}
-		return listUsers;
-	}
-	
-	private List<GroupWork> getAllGroupWork() throws SQLException{
-		String query = "SELECT p.id, p.name FROM Project p";
-		Connection connection = MysqlConfig.getConnection();
-		PreparedStatement statement = connection.prepareStatement(query);
-		ResultSet resultSet = statement.executeQuery();
-		List<GroupWork> listGroupWork = new ArrayList<GroupWork>();
-		
-		while(resultSet.next()) {
-			GroupWork groupWork = new GroupWork();
-			groupWork.setId(resultSet.getInt("id"));
-			groupWork.setName(resultSet.getString("name"));
-			listGroupWork.add(groupWork);
-		}
-		return listGroupWork;
 	}
 }

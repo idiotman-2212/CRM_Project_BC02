@@ -150,25 +150,21 @@
 										</tr>
 									</thead>
 									<tbody>
-
-										<c:forEach var="item" items="${ listTask }">
+										<c:forEach var="item" items="${listTask}">
 											<tr>
 												<td>${item.id }</td>
 												<td>${item.name }</td>
-												<td>${item.groupwork.name }</td>
-												<td>${item.users.name }</td>
+												<td>${item.groupWork.name }</td>
+												<td>${item.users.fullName }</td>
 												<td class="dateId">${item.startDate }</td>
 												<td class="dateId">${item.endDate }</td>
 												<td>${item.status.name }</td>
-												<td><a href="<c:url value="/task/edit?id=${item.id}"/>"
-													class="btn btn-sm btn-primary">Sửa</a> <a
-													href='<c:url value="/task/delete?id=${item.id}"/>'
-													class="btn btn-sm btn-danger">Xóa</a> <a
-													href="<c:url value="/task/detail?id=${item.id}"/>"
-													class="btn btn-sm btn-info">Xem</a></td>
+												<td><a href="#" class="btn btn-sm btn-primary btn-sua"
+													id-task="${item.id}">Sửa</a> <a href="#"
+													class="btn btn-sm btn-danger btn-xoa" id-task="${item.id}">Xóa</a>
+													<a href="user-details.html" class="btn btn-sm btn-info">Xem</a></td>
 											</tr>
 										</c:forEach>
-
 									</tbody>
 								</table>
 							</div>
@@ -204,6 +200,8 @@
 			$('#example').DataTable();
 		});
 	</script>
+	<!-- import file user-table.js để sử dụng -->
+	<script type="text/javascript" src="js/task.js"></script>
 </body>
 
 </html>

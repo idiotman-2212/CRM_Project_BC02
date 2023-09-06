@@ -16,33 +16,33 @@ public class TaskService {
 	private GroupWorkRepository  groupWorkRepository = new GroupWorkRepository();
 	private TaskRepository taskRepository = new TaskRepository();
 	
-	public List<Task> getAllTask(){
+	public List<Task> getAllTasks(){
 		return taskRepository.getAllTask();
 	}
 	
-	public List<Users> getAllUsers(){
-		return userRepository.getAllUsers();
+	public List<Users> getAllUsers() throws SQLException{
+		return taskRepository.getAllUsers();
 	}
 	
 	public List<GroupWork> getAllGroupWorks() throws SQLException{
-		return groupWorkRepository.getAllGroupWork();
+		return taskRepository.getAllGroupWork();
 	}
 	
-	public boolean insertTask(int project_name, String name, int performer, String start_date, String end_date) {
-		int count = taskRepository.insert(project_name, name, performer, start_date, end_date);
+	public boolean insertTask(int id_project, String name, int id_user, String start_date, String end_date) {
+		int count = taskRepository.insert(id_project, name, id_user, start_date, end_date);
 		return count > 0;
 	}
 	
-	public boolean deleteTask(String id) {
+	public boolean deleteTaskById(int id) {
 		int count =  taskRepository.deleteTaskById(id);
 		return count > 0;
 	}
-	public List<Task> findById(String id){
+	public List<Task> findById(int id){
 		return taskRepository.findById(id);
 	}
 	
-	public boolean updateTask(int project_name, String name, int performer, String start_date, String end_date) {
-		int count =  taskRepository.updateTaskById(end_date, project_name, name, project_name, start_date, end_date, performer);
+	public boolean updateTask(int id, int id_user, int id_project, String name, String start_date, String end_date, int id_status) {
+		int count =  taskRepository.updateTaskById(id, id_user, id_project, name, start_date, end_date, id_status);
 		return count > 0;
 	}
 }

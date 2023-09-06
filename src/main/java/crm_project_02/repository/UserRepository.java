@@ -43,7 +43,6 @@ public class UserRepository {
 	
 	public List<Users> getAllUsers(){
 		List<Users> listUser = new ArrayList<Users>();
-		
 		String query = "select u.id, u.firstName, u.lastName, u.userName, r.name\n"
 				+ "from Users u \n"
 				+ "join Role r ON u.id_role = r.id";
