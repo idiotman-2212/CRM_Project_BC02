@@ -8,10 +8,10 @@
   * Hệ thống cho phép nhân viên đăng nhập với tư cách thành viên, cập nhật tiến độ công việc. Xem các thống kê về tiến độ của các việc đã và đang thực hiện.
   * Hệ thống cũng cho phép quản trị hệ thống xem các thống kê về tiến độ các dự án.
 - Phân tích hệ thống
- * Loại người dùng (quyền)
-  * Quản trị hệ thống (Admin): Người dùng có toàn quyền đối với hệ thống, có thể thêm, sửa, xóa, xem thông tin và cấp quyền cho các thành viên khác, xem thống kê về tất cả các dự án.
-  * Quản lý dự án (Leader): Xem danh sách nhân viên của công ty, thêm, sửa, xóa, xem thông tin dự án do mình quản lý, ngoài ra có thể thêm hoặc loại bỏ người dùng là nhân viên thường vào dự án, phân công công   việc và xem thống kê về dự án thuộc về mình.
-  * Nhân viên (Member): Người dùng chỉ có quyền xem các công việc được giao trong mỗi dự án, cập nhật tiến độ công việc được giao, xem thống kê tiến độ các dự án của bản thân.
+  * Loại người dùng (quyền)
+   * Quản trị hệ thống (Admin): Người dùng có toàn quyền đối với hệ thống, có thể thêm, sửa, xóa, xem thông tin và cấp quyền cho các thành viên khác, xem thống kê về tất cả các dự án.
+   * Quản lý dự án (Leader): Xem danh sách nhân viên của công ty, thêm, sửa, xóa, xem thông tin dự án do mình quản lý, ngoài ra có thể thêm hoặc loại bỏ người dùng là nhân viên thường vào dự án, phân công công   việc và xem thống kê về dự án thuộc về mình.
+   * Nhân viên (Member): Người dùng chỉ có quyền xem các công việc được giao trong mỗi dự án, cập nhật tiến độ công việc được giao, xem thống kê tiến độ các dự án của bản thân.
 - Các module:
    * Quản lý quyền: Các thông tin như tên quyền, mô tả
    * Quản lý người dùng: Các thông tin như email, mật khẩu, họ tên, địa chỉ, số điện thoại, loại thành viên (quyền).
