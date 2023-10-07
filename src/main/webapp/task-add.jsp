@@ -47,7 +47,7 @@
 					data-target=".navbar-collapse"> <i class="fa fa-bars"></i>
 				</a>
 				<div class="top-left-part">
-					<a class="logo" href="index.html"> <b> <img
+					<a class="logo" href="<c:url value="/index" />"> <b> <img
 							src="plugins/images/pixeladmin-logo.png" alt="home" />
 					</b> <span class="hidden-xs"> <img
 							src="plugins/images/pixeladmin-text.png" alt="home" />
@@ -72,7 +72,8 @@
 								class="hidden-xs">Cybersoft</b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="profile.html">Thông tin cá nhân</a></li>
+								<li><a href="<c:url value="/profile" />">Thông tin cá
+										nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Đăng xuất</a></li>
@@ -158,15 +159,14 @@
 								<div class="form-group">
 									<label class="col-md-12">Người thực hiện</label>
 									<div class="col-md-12">
-										<select name="id_user"
-											class="form-control form-control-line">
+										<select name="id_user" class="form-control form-control-line">
 											<c:forEach var="item" items="${listUser }">
 												<option value="${item.id}">${item.fullName}</option>
 											</c:forEach>
-
 											<!-- <option>Nguyễn Văn Tèo</option>
                                             <option>Trần Thị Lan</option>
                                             <option>Cao Ngọc Hiếu</option> -->
+
 										</select>
 									</div>
 								</div>
@@ -187,7 +187,8 @@
 								<div class="form-group">
 									<div class="col-sm-12">
 										<button type="submit" class="btn btn-success">Lưu lại</button>
-										<a href="<c:url value= "/task"/>" class="btn btn-primary">Quay lại</a>
+										<a href="<c:url value= "/task"/>" class="btn btn-primary">Quay
+											lại</a>
 									</div>
 								</div>
 							</form>

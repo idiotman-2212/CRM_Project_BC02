@@ -74,4 +74,23 @@ VALUES ('Task 2', 'Complete task 2', '2023-04-01', '2023-04-15', 1, 1, 2);
 SELECT *from Users u;
 select * from `Role` r;
 SELECT * from Job j;
+ 
 SELECT * from Status s;
+
+
+SELECT 
+	j.id,
+    j.name,
+    p.name AS project_name,
+    u.fullName  AS performer,
+    j.startDate AS start_date,
+    j.endDate AS end_date
+FROM Job j
+JOIN Project p ON j.id_project = p.id
+JOIN Users u ON j.id_user = u.id
+where j.id = 1;
+
+UPDATE Job SET name = "Hello" , startDate = '2023-01-04', endDate = '2024-01-04', id_user = 1 ,
+				id_project  = 2 , id_status  = 1 WHERE id = 1;
+
+select u.id, u.firstName, u.lastName, u.userName, r.name from Users u join Role r ON u.id_role = r.id

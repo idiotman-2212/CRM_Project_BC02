@@ -84,7 +84,7 @@ $(document).ready(function() {
 		position: 'right',
 		size: "0px",
 		color: '#dcdcdc',
-	});
+	}); 
 	// Resize all elements
 	$("body").trigger("resize");
 	// visited ul li

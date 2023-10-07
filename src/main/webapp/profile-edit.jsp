@@ -1,5 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 
 <head>
     <meta charset="utf-8">
@@ -41,7 +44,7 @@
                     <i class="fa fa-bars"></i>
                 </a>
                 <div class="top-left-part">
-                    <a class="logo" href="index.html">
+                    <a class="logo" href="<c:url value="/index" />">
                         <b>
                             <img src="plugins/images/pixeladmin-logo.png" alt="home" />
                         </b>
@@ -69,7 +72,7 @@
                                 <b class="hidden-xs">Cybersoft</b>
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a href="profile.html">Thông tin cá nhân</a></li>
+                                <li><a href="<c:url value="/profile" />">Thông tin cá nhân</a></li>
                                 <li><a href="#">Thống kê công việc</a></li>
                                 <li class="divider"></li>
                                 <li><a href="#">Đăng xuất</a></li>
@@ -87,31 +90,31 @@
             <div class="sidebar-nav navbar-collapse slimscrollsidebar">
                 <ul class="nav" id="side-menu">
                     <li style="padding: 10px 0 0;">
-                        <a href="index.html" class="waves-effect"><i class="fa fa-clock-o fa-fw"
+                        <a href="<c:url value="/index" />" class="waves-effect"><i class="fa fa-clock-o fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Dashboard</span></a>
                     </li>
                     <li>
-                        <a href="user-table.html" class="waves-effect"><i class="fa fa-user fa-fw"
+                        <a href="<c:url value="/user-table" />" class="waves-effect"><i class="fa fa-user fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Thành viên</span></a>
                     </li>
                     <li>
-                        <a href="role-table.html" class="waves-effect"><i class="fa fa-modx fa-fw"
+                        <a href="<c:url value="/role-table" />" class="waves-effect"><i class="fa fa-modx fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Quyền</span></a>
                     </li>
                     <li>
-                        <a href="groupwork.html" class="waves-effect"><i class="fa fa-table fa-fw"
+                        <a href="<c:url value="/groupwork" />" class="waves-effect"><i class="fa fa-table fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
-                        <a href="task.html" class="waves-effect"><i class="fa fa-table fa-fw"
+                        <a href="<c:url value="/task" />" class="waves-effect"><i class="fa fa-table fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Công việc</span></a>
                     </li>
                     <li>
-                        <a href="blank.html" class="waves-effect"><i class="fa fa-columns fa-fw"
+                        <a href="<c:url value="/blank" />" class="waves-effect"><i class="fa fa-columns fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Blank Page</span></a>
                     </li>
                     <li>
-                        <a href="404.html" class="waves-effect"><i class="fa fa-info-circle fa-fw"
+                        <a href="<c:url value="/404" />" class="waves-effect"><i class="fa fa-info-circle fa-fw"
                                 aria-hidden="true"></i><span class="hide-menu">Error 404</span></a>
                     </li>
                 </ul>
@@ -132,45 +135,50 @@
                     <div class="col-md-2 col-12"></div>
                     <div class="col-md-8 col-xs-12">
                         <div class="white-box">
-                            <form class="form-horizontal form-material">
+                            <form action="<c:url value = '/profile-edit'/>" method="post"
+								class="form-horizontal form-material">
                                 <div class="form-group">
-                                    <label class="col-md-12">Tên dự án</label>
-                                    <div class="col-md-12">
-                                        <input type="text" readonly value="Dự án CRM" class="form-control form-control-line">
-                                    </div>
-                                </div>
+									<label class="col-md-12">Tên dự án</label>
+									<div class="col-md-12">
+										<input name="id_project" type="text" placeholder="Tên dự án"
+											class="form-control form-control-line">
+									</div>
+								</div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Tên công việc</label>
-                                    <div class="col-md-12">
-                                        <input type="text" readonly value="Thiết kế database" class="form-control form-control-line">
-                                    </div>
-                                </div>
+									<label class="col-md-12">Tên công việc</label>
+									<div class="col-md-12">
+										<input name="name" type="text" placeholder="Tên công việc"
+											class="form-control form-control-line">
+									</div>
+								</div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Ngày bắt đầu</label>
-                                    <div class="col-md-12">
-                                        <input type="text" readonly value="05-07/2020" class="form-control form-control-line"> 
-                                    </div>
-                                </div>
+									<label class="col-md-12">Ngày bắt đầu</label>
+									<div class="col-md-12">
+										<input name="startDate" type="text" placeholder="dd/MM/yyyy"
+											class="form-control form-control-line">
+									</div>
+								</div>
                                 <div class="form-group">
-                                    <label class="col-md-12">Ngày kết thúc</label>
-                                    <div class="col-md-12">
-                                        <input type="text" readonly value="17-07/2020" class="form-control form-control-line"> 
-                                    </div>
-                                </div>
+									<label class="col-md-12">Ngày kết thúc</label>
+									<div class="col-md-12">
+										<input name="endDate" type="text" placeholder="dd/MM/yyyy"
+											class="form-control form-control-line">
+									</div>
+								</div>
                                 <div class="form-group">
                                     <label class="col-md-12">Trạng thái</label>
                                     <div class="col-md-12">
-                                        <select class="form-control form-control-line">
-                                            <option>Chưa thực hiện</option>
-                                            <option selected>Đang thực hiện</option>
-                                            <option>Đã hoàn thành</option>
+                                        <select name = "id_status" class="form-control form-control-line">
+                                        <c:forEach var="item" items="${listStatus }">
+												<option value="${item.id}">${item.name}</option>
+											</c:forEach>
                                         </select>
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-12">
                                         <button type="submit" class="btn btn-success">Lưu lại</button>
-                                        <a href="profile.html" class="btn btn-primary">Quay lại</a>
+                                        <a href="<c:url value="/profile" />" class="btn btn-primary">Quay lại</a>
                                     </div>
                                 </div>
                             </form>

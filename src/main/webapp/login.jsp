@@ -18,19 +18,24 @@
       <div class="p-4 border mt-4">
         <form action="<c:url value = '/login'/>" method="post">
             <div class="form-group">
-              <label>Email</label>
-              <input type="email" class="form-control" name="email">
+              <input type="email" class="form-control" name="email" placeholder="Email">
             </div>
             <div class="form-group">
-              <label>Mật khẩu</label>
-              <input type="password" class="form-control" name="password">
+              <input type="password" class="form-control" name="password" placeholder="Password">
             </div>
-            <button type="submit" class="btn btn-primary">Đăng nhập</button>
+            
+            <input type="hidden" value="login" name="action"/>
+            <button type="submit" class="btn btn-primary">Đăng nhập</button> 
+              
+            	<p class = "form-group text-danger">${mess}</p>
+            	
           </form>
       </div>
+      	
       </div>
   </div>
 </div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>

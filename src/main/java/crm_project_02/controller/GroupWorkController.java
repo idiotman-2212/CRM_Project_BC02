@@ -23,7 +23,7 @@ import crm_project_02.service.UserService;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-@WebServlet(name = "groupWorkController", urlPatterns = { "/groupwork", "/groupwork-add" })
+@WebServlet(name = "groupWorkController", urlPatterns = { "/groupwork", "/groupwork-add", "/groupwork-edit" })
 public class GroupWorkController extends HttpServlet {
 	
 	private GroupWorkService groupWorkService = new GroupWorkService();
@@ -33,7 +33,7 @@ public class GroupWorkController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String path = req.getServletPath();
-
+        req.setCharacterEncoding("UTF-8");
         if (path.equals("/groupwork-add")) {
             req.getRequestDispatcher("groupwork-add.jsp").forward(req, resp);
         } else if (path.equals("/groupwork")) {
@@ -66,13 +66,16 @@ public class GroupWorkController extends HttpServlet {
             }
             req.setAttribute("listGroupWorks", listGroupWorks);
             req.getRequestDispatcher("groupwork.jsp").forward(req, resp);
-            //response.sendRedirect("groupwork-add.jsp");
 
+        }
+        else if (path.equals("/groupwork-edit")) {
+            req.getRequestDispatcher("groupwork-edit.jsp").forward(req, resp);
         }
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    	req.setCharacterEncoding("UTF-8");
         String projectName = req.getParameter("project_name");
         String start_date = req.getParameter("start_date");
         String end_date = req.getParameter("end_date");

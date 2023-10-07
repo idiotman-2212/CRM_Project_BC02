@@ -32,15 +32,17 @@ public class UserService {
 		return count > 0;
 	}
 	
-	public List<Users> findById(int id){
+	public Users findById(int id){
 		return userRepository.findById(id);
 	}
 	
-	public boolean updateUser(String fullname, String email, String pwd, String phone, int idRole, int id) {
-	    int count = userRepository.updateById(fullname, email, pwd, phone, idRole, id);
+	public boolean updateUser(String fullName, String email, String password, String phone, int idRole, int id) {
+	    int count = userRepository.updateById(fullName, email, password, phone, idRole, id);
 	    
 	    return count > 0;
 	}
 	
-		
+	public Users findEmailPasswordRole(String email, String password, int role) {
+		return userRepository.findEmailPasswordRole(email, password, role);
+	}
 }

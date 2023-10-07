@@ -54,7 +54,7 @@
 					data-target=".navbar-collapse"> <i class="fa fa-bars"></i>
 				</a>
 				<div class="top-left-part">
-					<a class="logo" href="index.html"> <b> <img
+					<a class="logo" href="<c:url value="/index" />"> <b> <img
 							src="plugins/images/pixeladmin-logo.png" alt="home" />
 					</b> <span class="hidden-xs"> <img
 							src="plugins/images/pixeladmin-text.png" alt="home" />
@@ -73,17 +73,31 @@
 				<ul class="nav navbar-top-links navbar-right pull-right">
 					<li>
 						<div class="dropdown">
-							<a class="profile-pic dropdown-toggle" data-toggle="dropdown"
-								href="#"> <img src="plugins/images/users/varun.jpg"
-								alt="user-img" width="36" class="img-circle" /> <b
-								class="hidden-xs">Cybersoft</b>
-							</a>
-							<ul class="dropdown-menu">
-								<li><a href="profile.html">Thông tin cá nhân</a></li>
+							<a class="profile-pic dropdown-toggle"
+								href="<c:url value="/login?action=login" />"> <img
+								src="plugins/images/users/varun.jpg" alt="user-img" width="36"
+								class="img-circle" /> <b
+								class="hidden-xs">Đăng nhập</b> 
+								
+								<%-- <c:if
+									test="${not empty Users }">
+									<a class="hidden-xs" href='#'>Welcome,
+										${Users.fullname }</a>
+									<a class="hidden-xs"
+										href='<c:url value ="/login?action=login"/>'>Đăng nhập</a>
+								</c:if> <c:if test="${empty Users }">
+									<a class="hidden-xs"
+										href='<c:url value ="/logout?action=logout"/>'>Thoát</a>
+								</c:if>--%>
+
+							</a> 
+
+							<%-- <ul class="dropdown-menu">
+								<li><a href="<c:url value="/profile" />">Thông tin cá nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Đăng xuất</a></li>
-							</ul>
+							</ul> --%>
 						</div>
 					</li>
 				</ul>
@@ -236,7 +250,7 @@
 		<!-- /.container-fluid -->
 		<footer class="footer text-center"> 2018 &copy; myclass.com </footer>
 	</div>
-	<!-- /#page-wrapper -->	
+	<!-- /#page-wrapper -->
 	<!-- /#wrapper -->
 	<!-- jQuery -->
 	<script src="plugins/bower_components/jquery/dist/jquery.min.js"></script>

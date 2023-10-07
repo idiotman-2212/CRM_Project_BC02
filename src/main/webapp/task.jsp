@@ -50,7 +50,7 @@
 					data-target=".navbar-collapse"> <i class="fa fa-bars"></i>
 				</a>
 				<div class="top-left-part">
-					<a class="logo" href="index.html"> <b> <img
+					<a class="logo" href="<c:url value="/index" />"> <b> <img
 							src="plugins/images/pixeladmin-logo.png" alt="home" />
 					</b> <span class="hidden-xs"> <img
 							src="plugins/images/pixeladmin-text.png" alt="home" />
@@ -75,7 +75,8 @@
 								class="hidden-xs">Cybersoft</b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="profile.html">Thông tin cá nhân</a></li>
+								<li><a href="<c:url value="/profile" />">Thông tin cá
+										nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Đăng xuất</a></li>
@@ -159,10 +160,13 @@
 												<td class="dateId">${item.startDate }</td>
 												<td class="dateId">${item.endDate }</td>
 												<td>${item.status.name }</td>
-												<td><a href="#" class="btn btn-sm btn-primary btn-sua"
-													id-task="${item.id}">Sửa</a> <a href="#"
-													class="btn btn-sm btn-danger btn-xoa" id-task="${item.id}">Xóa</a>
-													<a href="user-details.html" class="btn btn-sm btn-info">Xem</a></td>
+												<td><a
+													href="<c:url value='/task-edit' />?id=${item.id}"
+													class="btn btn-sm btn-primary btn-sua" id-task="${item.id}">Sửa</a>
+													<a href="#" class="btn btn-sm btn-danger btn-xoa"
+													id-task="${item.id}">Xóa</a> <a
+													href="<c:url value="/user-details" />"
+													class="btn btn-sm btn-info">Xem</a></td>
 											</tr>
 										</c:forEach>
 									</tbody>

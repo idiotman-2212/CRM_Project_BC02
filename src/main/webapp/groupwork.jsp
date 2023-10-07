@@ -75,7 +75,8 @@
 								class="hidden-xs">Cybersoft</b>
 							</a>
 							<ul class="dropdown-menu">
-								<li><a href="profile.html">Thông tin cá nhân</a></li>
+								<li><a href="<c:url value="/profile" />">Thông tin cá
+										nhân</a></li>
 								<li><a href="#">Thống kê công việc</a></li>
 								<li class="divider"></li>
 								<li><a href="#">Đăng xuất</a></li>
@@ -126,8 +127,8 @@
 						<h4 class="page-title">Danh sách dự án</h4>
 					</div>
 					<div class="col-lg-9 col-sm-8 col-md-8 col-xs-12 text-right">
-						<a href="<c:url value= "/groupwork-add"/>" class="btn btn-sm btn-success">Thêm
-							mới</a>
+						<a href="<c:url value= "/groupwork-add"/>"
+							class="btn btn-sm btn-success">Thêm mới</a>
 					</div>
 					<!-- /.col-lg-12 -->
 				</div>
@@ -154,11 +155,13 @@
 												<td>${item.name }</td>
 												<td>${item.startDate }</td>
 												<td>${item.endDate }</td>
-												<td><a href="#" class="btn btn-sm btn-primary">Sửa</a>
+												<td><a
+													href="<c:url value='/groupwork-edit' />?id=${item.id}"
+													class="btn btn-sm btn-primary btn-sua" id-groupwork="${item.id}">Sửa</a>
 													<a href="#" class="btn btn-sm btn-danger btn-xoa"
 													id-groupwork="${item.id}">Xóa</a> <a
-													href="groupwork-details.html" class="btn btn-sm btn-info">Xem</a>
-												</td>
+													href="<c:url value="/groupwork-details" />"
+													class="btn btn-sm btn-info">Xem</a></td>
 											</tr>
 										</c:forEach>
 									</tbody>

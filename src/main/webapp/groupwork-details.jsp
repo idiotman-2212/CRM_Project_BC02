@@ -367,4 +367,5 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- Custom Theme JavaScript -->
     <script src="js/custom.min.js"></script>
 </body>
+
 </html>
